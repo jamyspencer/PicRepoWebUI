@@ -7,23 +7,27 @@ public class CustomSession {
     private    String password;
     private    String securityString;
 
-    public CustomSession(int begin){
-        task=begin;
-    }
-    public CustomSession(String ip, long expires, String name, String pw, String the_ss){
+    public CustomSession(String ip, String name, String pw){
         this.ip = ip;
-        this.expires = expires;
         this.name = name;
         this.password = pw;
         this.securityString = the_ss;
-    }
-    boolean isExpired(long now){
-        return now > this.expires;
+        this.expires = setExpires();
+        this.securityString = getRandomString();
     }
 
-    boolean isAuthentic(String name, String pw){
+    public boolean isExpired(){
+        Date now = new Date();
+        return now.getTime() > this.expires;
+    }
+
+    public boolean isAuthentic(String name, String pw){
         if (name.equals(this.name) && pw.equals(this.password)){return true;}
         return false;
+    }
+    public long setExpires(){
+        Date now = new Date();
+        return now.getTime() + 900000;
     }
 
     public String getIp() {
@@ -64,6 +68,25 @@ public class CustomSession {
 
     public void setSecurityString(String securityString) {
         this.securityString = securityString;
+    }
+
+    private String getRandomString(){
+        byte[] randbyte=new byte[32];
+        Random rand  = new Random(System.currentTimeMillis());
+        for (int idx = 0; idx < 32; ++idx) {
+            int randomInt = rand.nextInt(26); //0<=randomInt<26
+            //System.out.println(randomInt);
+            randbyte[idx]=(byte)(randomInt+65);
+        }
+
+        try {
+            String rs=new String(randbyte, "UTF-8");
+            //System.out.println(rs);
+            return rs;
+        } catch (Exception e) {
+            //System.out.println("bad string");
+            return "bad";
+        }
     }
 
 }
