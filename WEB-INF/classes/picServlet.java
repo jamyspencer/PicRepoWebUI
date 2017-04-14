@@ -65,6 +65,8 @@ public class picServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest req, HttpServletResponse res)
             throws ServletException, IOException {
+        Consumer <String> forwardTo =(url) ->ForwardTo(url,req,res);
+
         //Check for user logging out
         if(req.getParameter("logout") != null && req.getParameter("sessionID") != null){
             String ID = req.getParameter("sessionID").trim();

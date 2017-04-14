@@ -62,11 +62,11 @@ public class CustomSession {
     }
 
     public String getID() {
-        return securityString;
+        return this.ID;
     }
 
-    public void setID(String securityString) {
-        this.securityString = securityString;
+    public void setID(String ID) {
+        this.ID = ID;
     }
 
     private String getRandomString(){
