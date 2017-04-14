@@ -5,15 +5,14 @@ public class CustomSession {
     private    long expires;
     private    String name;
     private    String password;
-    private    String securityString;
+    private    String ID;
 
     public CustomSession(String ip, String name, String pw){
         this.ip = ip;
         this.name = name;
         this.password = pw;
-        this.securityString = the_ss;
         this.expires = setExpires();
-        this.securityString = getRandomString();
+        this.ID = getRandomString();
     }
 
     public boolean isExpired(){
@@ -62,11 +61,11 @@ public class CustomSession {
         this.password = password;
     }
 
-    public String getSecurityString() {
+    public String getID() {
         return securityString;
     }
 
-    public void setSecurityString(String securityString) {
+    public void setID(String securityString) {
         this.securityString = securityString;
     }
 

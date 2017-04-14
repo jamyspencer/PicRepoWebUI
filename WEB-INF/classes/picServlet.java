@@ -66,16 +66,15 @@ public class picServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse res)
             throws ServletException, IOException {
         //Check for user logging out
-        if(req.getParameter("logout") != null && is_valid_session){
+        if(req.getParameter("logout") != null && req.getParameter("sessionID") != null){
+            String ID = req.getParameter("sessionID").trim();
             for (int i = 0; i < the_sessions.size(); i++) {
-                if (the_sessions.get(i).equals(this_session)) {  //Found an active session
-                    if (logging) log("removing: " + the_sessions.get(i));
+                if (the_sessions.get(i).getID().equals(ID)) {  //Found an active session
+                    if (logging) log("removing: " + the_sessions.get(i).getID());
                     the_sessions.remove(i);
                     break;
                 }
-                if (logging) log("looping through logout " + the_sessions.get(i));
             }
-            req.setAttribute("thesessioncount",the_sessions.size());
             forwardTo.accept("login.jsp");
             return;
         }
