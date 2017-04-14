@@ -21,7 +21,7 @@ public class picServlet extends HttpServlet {
 
         if (req.getParameter("sessionID") != null) {
             for (int i = 0; i < the_sessions.size(); i++) {
-                if (the_sessions.get(i).getSecurityString().equals(req.getParameter("sessionID").trim())) {  //Found an session
+                if (the_sessions.get(i).getID().equals(req.getParameter("sessionID").trim())) {  //Found an session
                     if (the_sessions.get(i).isExpired()){
                         the_sessions.remove(i);
                     }
