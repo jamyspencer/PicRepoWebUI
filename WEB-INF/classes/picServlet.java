@@ -27,6 +27,7 @@ public class picServlet extends HttpServlet {
                     }
                     else {
                         is_valid_session = true;
+                        this_session =the_sessions.get(i);
                         if (logging) log("Session validated " + this_session);
                     }
                     break;
