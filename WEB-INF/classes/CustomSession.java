@@ -22,10 +22,6 @@ public class CustomSession {
         return now.getTime() > this.expires;
     }
 
-    public boolean isAuthentic(String name, String pw){
-        if (name.equals(this.name) && pw.equals(this.password)){return true;}
-        return false;
-    }
     public long setExpires(){
         Date now = new Date();
         return now.getTime() + 900000;
