@@ -15,7 +15,7 @@ public class picServlet extends HttpServlet {
     }
 
     protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException{
-        CustomSession this_session;
+        CustomSession this_session = null;
         boolean is_valid_session = false;
         Consumer <String> forwardTo =(url) ->ForwardTo(url,req,res);
 
@@ -41,7 +41,7 @@ public class picServlet extends HttpServlet {
             is_valid_session = true;
         }
         //Check to see if the session needs to be authorized
-        if (!this_session.isUserAuthenticated) {
+        if (!this_session.isUserAuthenticated()) {
 
             //see if there was a user name and password passed in
             if (req.getParameter("whoisit") != null && req.getParameter("passwd") != null) {
@@ -53,7 +53,7 @@ public class picServlet extends HttpServlet {
             }
         }
         //authorized user, load upload page
-        if(this_session.isUserAuthenticated) {
+        if(this_session.isUserAuthenticated()) {
             forwardTo.accept("upload.jsp");
         }
         else forwardTo.accept("search.jsp");
