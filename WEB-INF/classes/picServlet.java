@@ -26,8 +26,9 @@ public class picServlet extends HttpServlet {
                         the_sessions.remove(i);
                     }
                     else {
-                        is_valid_session = true;
                         this_session =the_sessions.get(i);
+                        is_valid_session = true;
+                        if (this_session.isUserAuthenticated) is_authorized_session = true;
                         if (logging) log("Session validated " + this_session);
                     }
                     break;
@@ -35,31 +36,28 @@ public class picServlet extends HttpServlet {
             }
         }
 
-        //Check to see if the session needs to be validated
-        if (!is_valid_session) {
+        if (!is_valid_session){
+            this_session = new CustomSession(req.getRemoteAddr());
+            the_sessions.add(this_session);
+            is_valid_session = true;
+        }
+        //Check to see if the session needs to be authorized
+        if (!this_session.isUserAuthenticated) {
 
             //see if there was a user name and password passed in
             if (req.getParameter("whoisit") != null && req.getParameter("passwd") != null) {
                 String name = req.getParameter("whoisit").trim();
                 String pw = req.getParameter("passwd").trim();
-                this_session = new CustomSession(req.getRemoteAddr(), name, pw);
-                the_sessions.add(this_session);
-                is_valid_session = true;
-                if(logging) log("Starting new session" + this_session);
+
+//                Enter code to authenticate user here
+//                is_authorized_session = true;
             }
-            //if no valid user name and password send to login page
-            else {
-                forwardTo.accept("login.jsp");
-                return;
-            }
-
-
         }
-        //valid session, run primary logic and display getNotes.jsp
-        if(is_valid_session) {
-
-            return;
+        //authorized user, load upload page
+        if(this_session.isUserAuthenticated) {
+            forwardTo.accept("upload.jsp");
         }
+        else forwardTo.accept("search.jsp");
 
         return;
     }//end doPost
@@ -78,7 +76,7 @@ public class picServlet extends HttpServlet {
                     break;
                 }
             }
-            forwardTo.accept("login.jsp");
+            forwardTo.accept("search.jsp");
             return;
         }
     }

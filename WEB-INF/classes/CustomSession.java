@@ -3,14 +3,16 @@ import java.util.*;
 public class CustomSession {
     private    String ip;
     private    long expires;
-    private    String name;
-    private    String password;
+    private    boolean userAuthenticated;
     private    String ID;
 
-    public CustomSession(String ip, String name, String pw){
+    public CustomSession(){
+        this.expires = setExpires();
+        this.ID = getRandomString();
+    }
+
+    public CustomSession(String ip){
         this.ip = ip;
-        this.name = name;
-        this.password = pw;
         this.expires = setExpires();
         this.ID = getRandomString();
     }
@@ -37,12 +39,12 @@ public class CustomSession {
         this.ip = ip;
     }
 
-    public String getName() {
-        return name;
+    public boolean isUserAuthenticated() {
+        return userAuthenticated;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setUserAuthenticated(boolean userAuthenticated) {
+        this.userAuthenticated = userAuthenticated;
     }
 
     public long getExpires() {
@@ -51,14 +53,6 @@ public class CustomSession {
 
     public void setExpires(long expires) {
         this.expires = expires;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     public String getID() {
