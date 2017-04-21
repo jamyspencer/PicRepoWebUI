@@ -9,6 +9,6 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>picServlet</servlet-name>
-        <url-pattern>/PicSearch</url-pattern>
+        <url-pattern>/picServlet</url-pattern>
     </servlet-mapping>
 </web-app>
