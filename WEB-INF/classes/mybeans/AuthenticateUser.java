@@ -7,7 +7,7 @@ import java.util.Arrays;
 import static java.util.Arrays.asList;
 import java.sql.*; 
 
-    public class AuthenticateUser implements java.io.Serializable {
+    public class AuthenticateUser {
     static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";  
     static final String DB_URL = "jdbc:mysql://localhost/cs4010";
     static final String USER = "cs4010";
