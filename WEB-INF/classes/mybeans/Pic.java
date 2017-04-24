@@ -1,17 +1,19 @@
+package mybeans;
+
 public class Pic {
 
     private String fileName;
     private int sqlID;
 
-    public string getTag() {
+    public String getTag() {
         return tag;
     }
 
-    public void setTag(string tag) {
+    public void setTag(String tag) {
         this.tag = tag;
     }
 
-    private string tag;
+    private String tag;
 
     public String getFileName() {
         return fileName;

@@ -7,7 +7,8 @@ import java.util.Arrays;
 import static java.util.Arrays.asList;
 import java.sql.*;
 
-public class picList {
+
+public class PicList {
     static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
     static final String DB_URL = "jdbc:mysql://localhost/cs4010";
     static final String USER = "cs4010";
@@ -15,7 +16,7 @@ public class picList {
 
     private ArrayList<Pic> pics;
 
-    public picList() {
+    public PicList() {
     }
 
     public boolean tryGetList(String search) {
@@ -48,7 +49,7 @@ public class picList {
             Class.forName("com.mysql.jdbc.Driver");
             Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
             Statement stmt = conn.createStatement();
-            String this_query = " INSERT INTO jcs436pics(filename, tag) VALUES('" + fileName "' '" + tag + "');";
+            String this_query = " INSERT INTO jcs436pics(filename, tag) VALUES('" + fileName + "' '" + tag + "');";
             ResultSet rs = stmt.executeQuery(this_query);
 
         }catch(exception e){

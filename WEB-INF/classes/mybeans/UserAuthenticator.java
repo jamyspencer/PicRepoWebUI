@@ -7,13 +7,13 @@ import java.util.Arrays;
 import static java.util.Arrays.asList;
 import java.sql.*; 
 
-    public class AuthenticateUser {
+    public class UserAuthenticator {
     static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";  
     static final String DB_URL = "jdbc:mysql://localhost/cs4010";
     static final String USER = "cs4010";
     static final String PASS = "cs4010";
 
-    public AuthenticateUser(){}
+    public UserAuthenticator(){}
 
     public boolean tryLogin(String login_id, String login_pass){
         try {
