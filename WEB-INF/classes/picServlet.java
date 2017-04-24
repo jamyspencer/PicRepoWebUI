@@ -56,7 +56,7 @@ public class picServlet extends HttpServlet {
 //                is_authorized_session = true;
             }
         }
-        if (req.getParameter("task").trim().equals("search")){
+        if (req.getParameter("task") != null && req.getParameter("task").trim().equals("search")){
             thesePics = new PicList();
             thesePics.tryGetList(req.getParameter("search_term").trim());
 
