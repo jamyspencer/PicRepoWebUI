@@ -52,7 +52,7 @@ public class PicList implements java.io.Serializable{
             String this_query = " INSERT INTO jcs436pics(filename, tag) VALUES('" + fileName + "' '" + tag + "');";
             ResultSet rs = stmt.executeQuery(this_query);
 
-        }catch(exception e){
+        }catch(Exception e){
             return false;
         }
         return true;

@@ -14,7 +14,7 @@ public class Pic implements java.io.Serializable{
     public void setTag(String tag) {
         this.tag = tag;
     }
-    
+
     public String getFileName() {
         return fileName;
     }
