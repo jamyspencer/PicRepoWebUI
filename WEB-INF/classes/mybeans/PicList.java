@@ -8,7 +8,7 @@ import static java.util.Arrays.asList;
 import java.sql.*;
 
 
-public class PicList {
+public class PicList implements java.io.Serializable{
     static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
     static final String DB_URL = "jdbc:mysql://localhost/cs4010";
     static final String USER = "cs4010";

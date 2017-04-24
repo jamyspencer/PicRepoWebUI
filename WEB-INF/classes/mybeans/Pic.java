@@ -1,11 +1,13 @@
 package mybeans;
 
+import
+
 public class Pic {
 
     private String fileName;
     private int sqlID;
 
-    public String getTag() {
+    public String getTag() implements java.io.Serializable{
         return tag;
     }
 
