@@ -1,15 +1,20 @@
 package mybeans;
 
+import java.io.Serializable;
 
-public class Pic implements java.io.Serializable{
+public class Pic implements Serializable{
 
     private String fileName;
     private String tag;
     private int sqlID;
 
-    public String getTag(){
-        return tag;
+    public Pic(){
+        this.fileName = "";
+        this.tag = "";
+        this.sqlID = -1;
     }
+
+    public String getTag(){ return tag; }
 
     public void setTag(String tag) {
         this.tag = tag;

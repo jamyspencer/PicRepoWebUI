@@ -4,11 +4,12 @@ import java.util.List;
 import java.util.ListIterator;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.io.Serializable;
 import static java.util.Arrays.asList;
 import java.sql.*;
 
 
-public class PicList implements java.io.Serializable{
+public class PicList implements Serializable{
     static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
     static final String DB_URL = "jdbc:mysql://localhost/cs4010";
     static final String USER = "cs4010";

@@ -17,7 +17,7 @@ public class picServlet extends HttpServlet {
         the_sessions = new ArrayList<CustomSession>();
     }
 
-    protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException{
+    protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException{
         if (logging) log("doPost activated ");
         CustomSession this_session = null;
         boolean is_valid_session = false;
@@ -70,6 +70,7 @@ public class picServlet extends HttpServlet {
 
         return;
     }//end doPost
+/*
 
     protected void doGet(HttpServletRequest req, HttpServletResponse res)
             throws ServletException, IOException {
@@ -91,6 +92,7 @@ public class picServlet extends HttpServlet {
             return;
         }
     }
+*/
 
     public void log(String s){
 
