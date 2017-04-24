@@ -4,6 +4,8 @@ import javax.servlet.http.*;
 import java.io.*; 
 import java.util.*;
 import java.util.function.*;
+import mybeans.UserAuthenticator;
+import mybeans.PicList;
 
 
 public class picServlet extends HttpServlet {
