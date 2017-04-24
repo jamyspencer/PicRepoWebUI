@@ -20,6 +20,16 @@ public class PicList implements Serializable{
     public PicList() {
     }
 
+    public String sendPics(){
+        String html = "";
+        if (pics != null) {
+            for (int i = 0; i < pics.size(); i++) {
+                html = html + "<div class='col-sm-6, col-md-4'> <img src='pics/"+ pics.get(i).getFileName +"'></div>";
+            }
+        }
+        return html;
+    }
+
     public boolean tryGetList(String search) {
         try {
             Class.forName("com.mysql.jdbc.Driver");

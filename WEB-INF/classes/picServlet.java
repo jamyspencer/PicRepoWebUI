@@ -18,10 +18,23 @@ public class picServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException{
-        if (logging) log("doPost activated ");
+
         CustomSession this_session = null;
         boolean is_valid_session = false;
         Consumer <String> forwardTo =(url) ->ForwardTo(url,req,res);
+
+        if(req.getParameter("logout") != null && req.getParameter("sessionID") != null){
+            String ID = req.getParameter("sessionID").trim();
+            for (int i = 0; i < the_sessions.size(); i++) {
+                if (the_sessions.get(i).getID().equals(ID)) {  //Found an active session
+                    if (logging) log("removing: " + the_sessions.get(i).getID());
+                    the_sessions.remove(i);
+                    break;
+                }
+            }
+            forwardTo.accept("search.jsp");
+            return;
+        }
 
         if (req.getParameter("sessionID") != null) {
             for (int i = 0; i < the_sessions.size(); i++) {
@@ -56,6 +69,9 @@ public class picServlet extends HttpServlet {
 //                is_authorized_session = true;
             }
         }
+        if (this_session.isUserAuthenticated()){
+            forwardTo.accept(Add_Pic.html);
+        }
         if (req.getParameter("task") != null && req.getParameter("task").trim().equals("search")){
             thesePics = new PicList();
             thesePics.tryGetList(req.getParameter("search_term").trim());
@@ -79,18 +95,7 @@ public class picServlet extends HttpServlet {
         if (logging) log("doGet activated ");
 
         //Check for user logging out
-        if(req.getParameter("logout") != null && req.getParameter("sessionID") != null){
-            String ID = req.getParameter("sessionID").trim();
-            for (int i = 0; i < the_sessions.size(); i++) {
-                if (the_sessions.get(i).getID().equals(ID)) {  //Found an active session
-                    if (logging) log("removing: " + the_sessions.get(i).getID());
-                    the_sessions.remove(i);
-                    break;
-                }
-            }
-            forwardTo.accept("search.jsp");
-            return;
-        }
+
     }
 */
 
