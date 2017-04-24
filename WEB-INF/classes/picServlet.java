@@ -9,12 +9,14 @@ import java.util.function.*;
 public class picServlet extends HttpServlet {
     private    List<CustomSession> the_sessions;
     private final boolean logging = true;
+    private PicList thesePics;
 
     public void init() throws ServletException  {
         the_sessions = new ArrayList<CustomSession>();
     }
 
     protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException{
+        if (logging) log("doPost activated ");
         CustomSession this_session = null;
         boolean is_valid_session = false;
         Consumer <String> forwardTo =(url) ->ForwardTo(url,req,res);
@@ -52,6 +54,12 @@ public class picServlet extends HttpServlet {
 //                is_authorized_session = true;
             }
         }
+        if (req.getParameter("task").trim().equals("search")){
+            thesePics = new PicList();
+            thesePics.tryGetList(req.getParameter("search_term").trim());
+
+
+        }
         //authorized user, load upload page
         if(this_session.isUserAuthenticated()) {
             forwardTo.accept("upload.jsp");
@@ -64,6 +72,8 @@ public class picServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse res)
             throws ServletException, IOException {
         Consumer <String> forwardTo =(url) ->ForwardTo(url,req,res);
+
+        if (logging) log("doGet activated ");
 
         //Check for user logging out
         if(req.getParameter("logout") != null && req.getParameter("sessionID") != null){
@@ -80,15 +90,6 @@ public class picServlet extends HttpServlet {
         }
     }
 
-    boolean tooLong(String now,String then){
-        //Check amount of time that passed
-        return false;
-    }
-    boolean checkPW(String name,String password){
-        //Check password against name
-        return false;
-    }
-
     public void log(String s){
 
         try {
@@ -100,7 +101,6 @@ public class picServlet extends HttpServlet {
         } catch (IOException ex) {
 
         }
-
     }
 
     void ForwardTo(String url,HttpServletRequest req, HttpServletResponse res) {

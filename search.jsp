@@ -71,7 +71,7 @@
             <div class = "row">
                 <form class="form-group" method="post" action="http://hoare.cs.umsl.edu/servlet/j-spencer/PicSearch" >
                     <h2>Search Pic Database</h2>
-                    <input class="field" style="width: 100%; margin-bottom: 10px;"  type="text" name="java_source" hint="Search Tag"><br>
+                    <input class="field" style="width: 100%; margin-bottom: 10px;"  type="text" name="search_term" hint="Search Term"><br>
                     <input type="hidden" name="task" value="search">
                     <input type="submit" class="btn pull-right" value="Search">
                 </form>
