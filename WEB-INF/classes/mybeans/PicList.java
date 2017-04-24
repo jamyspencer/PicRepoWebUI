@@ -28,9 +28,9 @@ public class PicList implements java.io.Serializable{
             ResultSet rs = stmt.executeQuery(this_query);
             while (rs.next()) {
                 Pic temp = new Pic();
-                rs.getString("filename").equals(temp.setFileName);
-                rs.getString("tag").equals(temp.setTag);
-                rs.getString("id").equals(temp.setSqlID);
+                temp.setFileName(rs.getString("filename"));
+                temp.setTag(rs.getString("tag"));
+                temp.setSqlID(Integer.parseInt(rs.getString("id")));
                 pics.add(temp);
             }
 

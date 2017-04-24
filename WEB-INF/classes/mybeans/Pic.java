@@ -4,6 +4,7 @@ package mybeans;
 public class Pic implements java.io.Serializable{
 
     private String fileName;
+    private String tag;
     private int sqlID;
 
     public String getTag(){
