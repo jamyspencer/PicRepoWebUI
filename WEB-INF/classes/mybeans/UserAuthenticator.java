@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.ListIterator;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.io.*;
 import static java.util.Arrays.asList;
 import java.sql.*; 
 
@@ -17,6 +18,7 @@ public class UserAuthenticator {
     }
 
     public static boolean tryLogin(String login_id, String login_pass) {
+        log("running authenticator");
         try {
             Class.forName("com.mysql.jdbc.Driver");
             Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
@@ -24,6 +26,7 @@ public class UserAuthenticator {
             String this_query = " SELECT loginpass FROM jcs436login WHERE loginid='" + login_id + ";";
             ResultSet rs = stmt.executeQuery(this_query);
             if (rs.next()) {
+                log("the password is: " + rs.getString("loginpass"));
                 return rs.getString("loginpass").equals(login_pass);
             }
             rs.close();
