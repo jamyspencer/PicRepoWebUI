@@ -37,7 +37,6 @@ public class picServlet extends HttpServlet {
                 }
             }
             req.removeAttribute("logout");
-            return;
         }
 
         if (req.getParameter("sessionID") != null) {
@@ -72,7 +71,7 @@ public class picServlet extends HttpServlet {
             }
         }
 
-        if (req.getParameter("task") != null && req.getParameter("task").trim().equals("search")){
+        if (req.getParameter("search_term") != null){
             thesePics = new PicList();
             final Object lock = this_session.getID().intern();
             synchronized (lock) {
