@@ -69,7 +69,7 @@
 
         <div class="col-xs-12 col-sm-12 col-md-3 col-lg-2">
             <div class = "row">
-                <form class="form-group" method="get" action="http://hoare.cs.umsl.edu/servlet/j-spencer/PicSearch" >
+                <form class="form-group" method="get" action="http://hoare.cs.umsl.edu/servlet/j-spencer/PicServlet" >
                     <h2>Search Pic Database</h2>
                     <input class="field" style="width: 100%; margin-bottom: 10px;"  type="text" name="search_term" hint="Search Term"><br>
                     <input type="hidden" name="sessionID" value="${sessionID}">
