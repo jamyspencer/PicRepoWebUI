@@ -88,7 +88,9 @@ public class picServlet extends HttpServlet {
         }
         else {
             req.setAttribute("sessionID",this_session.getID());
-            if (thesePics.getPicQuantity() > 0){ req.setAttribute("picHTML", thesePics.sendPics()); }
+            if (thesePics != null && thesePics.getPicQuantity() > 0){
+                req.setAttribute("picHTML", thesePics.sendPics());
+            }
             forwardTo.accept("search.jsp");
         }
 
