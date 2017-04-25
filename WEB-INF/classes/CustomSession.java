@@ -106,7 +106,10 @@ public class CustomSession {
             conn.close();
         } catch (SQLException e) {
             return "sql error" + e.getMessage();
+        }catch (ClassNotFoundException e) {
+            return "class not found" + e.getMessage();
         }
+
         return "false";
     }
 
