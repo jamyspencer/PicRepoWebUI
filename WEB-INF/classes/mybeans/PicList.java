@@ -62,7 +62,7 @@ public class PicList implements Serializable{
         return "sql success";
     }
 
-    public boolean tryAddPic(String fileName, String tag){
+    public static String tryAddPic(String fileName, String tag){
         try{
             Class.forName("com.mysql.jdbc.Driver");
             Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
@@ -70,10 +70,12 @@ public class PicList implements Serializable{
             String this_query = " INSERT INTO jcs436Pics(filename, tag) VALUES('" + fileName + "' '" + tag + "');";
             ResultSet rs = stmt.executeQuery(this_query);
 
-        }catch(Exception e){
-            return false;
+        } catch (SQLException e) {
+            return e.getMessage();
+        }catch (ClassNotFoundException e) {
+            return e.getMessage();
         }
-        return true;
+        return "sql insertion success";
     }
     public int getPicQuantity(){
         if (pics == null){ return 0; }

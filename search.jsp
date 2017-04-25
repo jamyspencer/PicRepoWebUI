@@ -72,8 +72,8 @@
             <div class = "row">
                 <form class="form-group" method="get" action="http://hoare.cs.umsl.edu/servlet/j-spencer/picServlet" >
                     <h2>Search Pic Database</h2>
-                    <label for="searchterm">File Name</label>
-                    <input id="searchterm" class="field" style="width: 100%; margin-bottom: 10px;"  type="text" name="search_term" hint="Search Term"><br>
+                    <label for="searchterm">Search for Tag</label>
+                    <input id="searchterm" class="field" style="width: 100%; margin-bottom: 10px;"  type="text" name="search_term" hint="Search Term">
                     <input type="hidden" name="sessionID" value="${sessionID}">
                     <input type="hidden" name="task" value="search">
                     <input type="submit" class="btn pull-right" value="Search">
@@ -84,7 +84,7 @@
                     <h2>Login to Upload</h2>
                     <label for="userid">Log-in Name</label>
                     <input id="userid" class="field" style="width: 100%;" type="text" hint="login id" name="whoisit">
-                    <label for="passwd">File Name</label>
+                    <label for="passwd">Password</label>
                     <input id="passwd" class="field" style="width: 100%; margin-bottom: 10px;" type="password" hint="Password" name="passwd">
                     <input type="hidden" name="sessionID" value="${sessionID}">
                     <input type="hidden" name="task" value="login">

@@ -6,6 +6,10 @@ import java.util.*;
 import java.util.function.*;
 import mybeans.UserAuthenticator;
 import mybeans.PicList;
+import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.disk.DiskFileItemFactory;
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
+
 
 
 public class picServlet extends HttpServlet {
@@ -70,25 +74,23 @@ public class picServlet extends HttpServlet {
             if (logging) { log("Num of pics searched: " + String.valueOf(thesePics.getPicQuantity()));}
 
         }
-        //authorized user, load upload page
 
-        else {
-            req.setAttribute("sessionID",this_session.getID());
-            if (thesePics != null && thesePics.getPicQuantity() > 0){
-                req.setAttribute("picHTML", thesePics.sendPics());
-            }
-            forwardTo.accept("search.jsp");
+        req.setAttribute("sessionID",this_session.getID());
+        if (thesePics != null && thesePics.getPicQuantity() > 0){
+            req.setAttribute("picHTML", thesePics.sendPics());
         }
+        forwardTo.accept("search.jsp");
 
         return;
-    }//end doPost
+    }
 
     protected void doPost(HttpServletRequest req, HttpServletResponse res)
             throws ServletException, IOException {
 
         CustomSession this_session = null;
         boolean is_valid_session = false;
-        Consumer <String> forwardTo =(url) ->ForwardTo(url,req,res);
+        static final String UPLOAD_DIR = File(getServletContext().getRealPath("/");
+                Consumer <String> forwardTo =(url) ->ForwardTo(url,req,res);
 
         if (req.getParameter("sessionID") != null) {
             for (int i = 0; i < the_sessions.size(); i++) {
@@ -117,6 +119,40 @@ public class picServlet extends HttpServlet {
             String name = req.getParameter("whoisit").trim();
             String pw = req.getParameter("passwd").trim();
             log(this_session.tryLogin(name, pw));
+        }
+
+        //Check for incoming pic upload
+        if (req.getParameter("filename") != null && req.getParameter("tag") != null){
+            String fileName;
+            try {
+                List<FileItem> multiparts = new ServletFileUpload(
+                new DiskFileItemFactory()).parseRequest(req);
+                final Part filePart = request.getPart("file");
+                final String fileName = getFileName(filePart);
+
+                OutputStream out = null;
+                InputStream filecontent = null;
+                final PrintWriter writer = response.getWriter();
+
+
+                out = new FileOutputStream(new File(path + File.separator + fileName));
+                filecontent = filePart.getInputStream();
+
+                int read = 0;
+                final byte[] bytes = new byte[1024];
+
+                while ((read = filecontent.read(bytes)) != -1) {
+                    out.write(bytes, 0, read);
+                }
+
+                //File uploaded successfully
+                req.setAttribute("message", "File Uploaded Successfully");
+            } catch (Exception ex) {
+                request.setAttribute("message", "File Upload Failed");
+                log(ex.getMessage());
+            }
+
+            log (PicList.tryAddPic(fileName, req.getParameter("tag").trim()));
         }
 
         if(this_session.isUserAuthenticated()) {
@@ -165,6 +201,17 @@ public class picServlet extends HttpServlet {
     public void destroy()
     {
         log("The instance was destroyed");
+    }
+
+    private String getFileName(final Part part) {
+        final String partHeader = part.getHeader("content-disposition");
+        for (String content : part.getHeader("content-disposition").split(";")) {
+            if (content.trim().startsWith("filename")) {
+                return content.substring(
+                        content.indexOf('=') + 1).trim().replace("\"", "");
+            }
+        }
+        return null;
     }
 
 }

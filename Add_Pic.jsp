@@ -70,13 +70,13 @@
 
         <div class="col-xs-12 col-sm-12 col-md-3 col-lg-2">
             <div class = "row">
-                <form class="form-group" method="get" action="http://hoare.cs.umsl.edu/servlet/j-spencer/picServlet" >
+                <form class="form-group" method="post" action="http://hoare.cs.umsl.edu/servlet/j-spencer/picServlet" enctype="multipart/form-data" >
                     <h2>Add Pic to Database</h2>
-                    <label for="fileName">File Name</label>
-                    <input id="fileName" class="field" style="width: 100%; margin-bottom: 10px;"  type="text" name="fileName">
+                    <label for="file">File Name</label>
+                    <input id="file" class="field" style="width: 100%; margin-bottom: 10px;"  type="file" name="file">
                     <label for="tag">Searchable Tag</label>
                     <input id="tag" class="field" style="width: 100%; margin-bottom: 10px;"  type="text" name="tag">
-                    <label for="location">Searchable Tag</label>
+                    <label for="location">File Location</label>
                     <input id="location" class="field" style="width: 100%; margin-bottom: 10px;"  type="text" name="location">
                     <input type="hidden" name="sessionID" value="${sessionID}">
                     <input type="hidden" name="task" value="add">
