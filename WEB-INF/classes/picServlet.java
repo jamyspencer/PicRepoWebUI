@@ -6,9 +6,9 @@ import java.util.*;
 import java.util.function.*;
 import mybeans.UserAuthenticator;
 import mybeans.PicList;
-//import org.apache.commons.fileupload.FileItem;
-//import org.apache.commons.fileupload.disk.DiskFileItemFactory;
-//import org.apache.commons.fileupload.servlet.ServletFileUpload;
+import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.disk.DiskFileItemFactory;
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 
 
@@ -122,7 +122,7 @@ public class picServlet extends HttpServlet {
         }
 
         //Check for incoming pic upload
-/*        if (req.getParameter("filename") != null && req.getParameter("tag") != null){
+        if (req.getParameter("filename") != null && req.getParameter("tag") != null){
             String fileName;
             try {
                 List<FileItem> multiparts = new ServletFileUpload(
@@ -148,12 +148,12 @@ public class picServlet extends HttpServlet {
                 //File uploaded successfully
                 req.setAttribute("message", "File Uploaded Successfully");
             } catch (Exception ex) {
-                req.setAttribute("message", "File Upload Failed");
+                request.setAttribute("message", "File Upload Failed");
                 log(ex.getMessage());
             }
 
             log (PicList.tryAddPic(fileName, req.getParameter("tag").trim()));
-        }*/
+        }
 
         if(this_session.isUserAuthenticated()) {
             forwardTo.accept("Add_Pic.jsp");
