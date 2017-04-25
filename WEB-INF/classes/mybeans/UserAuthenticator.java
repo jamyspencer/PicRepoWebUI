@@ -43,7 +43,7 @@ public class UserAuthenticator {
     public static void log(String s){
 
         try {
-            File outFile = new File("~/tomcat/my_log");
+            File outFile = new File("~/tomcat/sql_log");
             outFile.createNewFile();
             PrintWriter fileWriter = new PrintWriter(new FileOutputStream(outFile,true));
             fileWriter.println(s+" at: " + new Date(System.currentTimeMillis()).toString());
