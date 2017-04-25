@@ -35,7 +35,7 @@ public class PicList implements Serializable{
             Class.forName("com.mysql.jdbc.Driver");
             Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
             Statement stmt = conn.createStatement();
-            String this_query = " SELECT * FROM jcs436pics WHERE tag='" + search.trim() + ";";
+            String this_query = " SELECT * FROM jcs436pics WHERE tag='" + search.trim() + "';";
             ResultSet rs = stmt.executeQuery(this_query);
             while (rs.next()) {
                 Pic temp = new Pic();
