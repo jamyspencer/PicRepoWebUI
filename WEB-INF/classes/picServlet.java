@@ -12,6 +12,7 @@ public class picServlet extends HttpServlet {
     private    List<CustomSession> the_sessions;
     private final boolean logging = true;
     private PicList thesePics;
+    String ID;
 
     public void init() throws ServletException  {
         the_sessions = new ArrayList<CustomSession>();
@@ -23,18 +24,19 @@ public class picServlet extends HttpServlet {
         boolean is_valid_session = false;
         Consumer <String> forwardTo =(url) ->ForwardTo(url,req,res);
 
-        if(req.getParameter("logout") != null && req.getParameter("sessionID") != null){
-            String ID = req.getParameter("sessionID").trim();
-            for (int i = 0; i < the_sessions.size(); i++) {
-                if (the_sessions.get(i).getID().equals(ID)) {  //Found an active session
-                    if (logging) log("removing: " + the_sessions.get(i).getID());
-                    the_sessions.remove(i);
-                    req.removeAttribute("sessionID");
-                    break;
+        if(req.getParameter("logout") != null){
+            if (req.getParameter("sessionID") != null) {
+                ID = req.getParameter("sessionID").trim();
+                for (int i = 0; i < the_sessions.size(); i++) {
+                    if (the_sessions.get(i).getID().equals(ID)) {  //Found an active session
+                        if (logging) log("removing: " + the_sessions.get(i).getID());
+                        the_sessions.remove(i);
+                        req.removeAttribute("sessionID");
+                        break;
+                    }
                 }
             }
             req.removeAttribute("logout");
-            forwardTo.accept("search.jsp");
             return;
         }
 
