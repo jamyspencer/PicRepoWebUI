@@ -78,7 +78,7 @@ public class picServlet extends HttpServlet {
             synchronized (lock) {
                 thesePics.tryGetList(req.getParameter("search_term").trim());
             }
-            if (logging) { log("Num of pics searched: " + String.parseInt(thesePics.getPicQuantity()));}
+            if (logging) { log("Num of pics searched: " + String.valueOf(thesePics.getPicQuantity()));}
 
         }
         //authorized user, load upload page
