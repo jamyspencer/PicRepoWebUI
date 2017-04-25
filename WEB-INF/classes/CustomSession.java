@@ -1,5 +1,6 @@
 import java.util.*;
 import java.sql.*;
+import java.io.*;
 
 
 public class CustomSession {
@@ -20,12 +21,12 @@ public class CustomSession {
     }
 
     public boolean isExpired(){
-        Date now = new Date();
+        java.util.Date now = new java.util.Date();
         return now.getTime() > this.expires;
     }
 
     public long setExpires(){
-        Date now = new Date();
+        java.util.Date now = new java.util.Date();
         return now.getTime() + 900000;
     }
 
@@ -120,7 +121,7 @@ public class CustomSession {
             File outFile = new File("~/tomcat/sql_log");
             outFile.createNewFile();
             PrintWriter fileWriter = new PrintWriter(new FileOutputStream(outFile,true));
-            fileWriter.println(s+" at: " + new Date(System.currentTimeMillis()).toString());
+            fileWriter.println(s+" at: " + new java.util.Date(System.currentTimeMillis()).toString());
             fileWriter.close();
         } catch (IOException ex) {
 
