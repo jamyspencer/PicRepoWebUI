@@ -81,10 +81,10 @@ public class CustomSession {
         }
     }
     public String tryLogin(String login_id, String login_pass) {
-        static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
-        static final String DB_URL = "jdbc:mysql://localhost/cs4010";
-        static final String USER = "cs4010";
-        static final String PASS = "cs4010";
+        final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
+        final String DB_URL = "jdbc:mysql://localhost/cs4010";
+        final String USER = "cs4010";
+        final String PASS = "cs4010";
 
         try {
             Class.forName("com.mysql.jdbc.Driver");
