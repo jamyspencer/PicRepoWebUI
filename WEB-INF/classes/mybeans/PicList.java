@@ -24,7 +24,8 @@ public class PicList implements Serializable{
         String html = "";
         if (pics != null) {
             for (int i = 0; i < pics.size(); i++) {
-                html = html + "<div class='col-sm-6, col-md-4'> <img src='pics/"+ pics.get(i).getFileName() +"'></div>";
+                html = html + "<div class='col-sm-6, col-md-4'> <img class='img-responsive, img-rounded' src='pics/"+
+                        pics.get(i).getFileName() +"'></div>";
             }
         }
         return html;
@@ -62,7 +63,7 @@ public class PicList implements Serializable{
             Class.forName("com.mysql.jdbc.Driver");
             Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
             Statement stmt = conn.createStatement();
-            String this_query = " INSERT INTO jcs436pics(filename, tag) VALUES('" + fileName + "' '" + tag + "');";
+            String this_query = " INSERT INTO jcs436Pics(filename, tag) VALUES('" + fileName + "' '" + tag + "');";
             ResultSet rs = stmt.executeQuery(this_query);
 
         }catch(Exception e){
