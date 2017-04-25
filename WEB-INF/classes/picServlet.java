@@ -64,7 +64,7 @@ public class picServlet extends HttpServlet {
         if (req.getParameter("whoisit") != null && req.getParameter("passwd") != null) {
             String name = req.getParameter("whoisit").trim();
             String pw = req.getParameter("passwd").trim();
-            this_session.tryLogin(name, pw));
+            this_session.tryLogin(name, pw);
         }
 
 
