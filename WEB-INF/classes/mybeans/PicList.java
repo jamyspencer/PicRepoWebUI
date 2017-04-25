@@ -53,7 +53,7 @@ public class PicList implements Serializable{
         }catch (ClassNotFoundException e) {
             return e.getMessage();
         }
-        return true;
+        return "sql success";
     }
 
     public boolean tryAddPic(String fileName, String tag){
