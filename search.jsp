@@ -49,7 +49,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#">PicSearch</a>
+                <a class="navbar-brand" href="http://hoare.cs.umsl.edu/servlet/j-spencer/picServlet">PicSearch</a>
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
