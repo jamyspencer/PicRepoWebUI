@@ -68,4 +68,8 @@ public class PicList implements Serializable{
         }
         return true;
     }
+    public int getPicQuantity(){
+        if (pics == null){ return 0; }
+        else {return pics.size(); }
+    }
 }
