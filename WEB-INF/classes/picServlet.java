@@ -20,7 +20,7 @@ public class picServlet extends HttpServlet {
 
         CustomSession this_session = null;
         boolean is_valid_session = false;
-        private PicList thesePics;
+        PicList thesePics;
         String ID;
         Consumer <String> forwardTo =(url) ->ForwardTo(url,req,res);
 
