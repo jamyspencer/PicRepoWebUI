@@ -31,6 +31,7 @@ public class PicList implements Serializable{
     }
 
     public String tryGetList(String search) {
+        Pic temp;
         try {
             Class.forName("com.mysql.jdbc.Driver");
             Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
@@ -38,11 +39,11 @@ public class PicList implements Serializable{
             String this_query = " SELECT * FROM jcs436Pics WHERE tag='" + search.trim() + "';";
             ResultSet rs = stmt.executeQuery(this_query);
             while (rs.next()) {
-                Pic temp = new Pic();
+                temp = new Pic();
                 temp.setFileName(rs.getString("filename"));
                 temp.setTag(rs.getString("tag"));
                 temp.setSqlID(Integer.parseInt(rs.getString("id")));
-                pics.add(temp);
+                this.pics.add(temp);
             }
 
             rs.close();
