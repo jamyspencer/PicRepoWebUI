@@ -93,7 +93,7 @@ public class CustomSession {
             Class.forName("com.mysql.jdbc.Driver");
             Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
             Statement stmt = conn.createStatement();
-            String this_query = " SELECT loginpass FROM jcs436login WHERE loginid='" + login_id + ";";
+            String this_query = " SELECT loginpass FROM jcs436login WHERE loginid='" + login_id + "';";
             ResultSet rs = stmt.executeQuery(this_query);
             if (rs.next()) {
                 if (rs.getString("loginpass").equals(login_pass)) {
