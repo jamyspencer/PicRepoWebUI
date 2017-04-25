@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!doctype html>
 <html>
 <head>
@@ -27,6 +28,7 @@
             border-radius: 4px;
             padding: 5px;
             min-height: 245px;
+            margin: 5px;
         }
         .btn{
             margin-top: 10px;
@@ -53,7 +55,7 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
-                    <li><a href="http://hoare.cs.umsl.edu/servlet/j-spencer/picServlet?logout=true">Logout</a></li>
+                    <li><a href="http://hoare.cs.umsl.edu/servlet/j-spencer/picServlet?logout=true&sessionID=${sessionID}">Logout</a></li>
                 </ul>
 
             </div><!-- /.navbar-collapse -->
@@ -64,7 +66,24 @@
 
 <body>
 <div class = "container-fluid">
-    <div class = "row"> Enter new pic
+    <div class = "row">
+
+        <div class="col-xs-12 col-sm-12 col-md-3 col-lg-2">
+            <div class = "row">
+                <form class="form-group" method="get" action="http://hoare.cs.umsl.edu/servlet/j-spencer/picServlet" >
+                    <h2>Add Pic to Database</h2>
+                    <label for="fileName">File Name</label>
+                    <input id="fileName" class="field" style="width: 100%; margin-bottom: 10px;"  type="text" name="fileName">
+                    <label for="tag">Searchable Tag</label>
+                    <input id="tag" class="field" style="width: 100%; margin-bottom: 10px;"  type="text" name="tag">
+                    <label for="location">Searchable Tag</label>
+                    <input id="location" class="field" style="width: 100%; margin-bottom: 10px;"  type="text" name="location">
+                    <input type="hidden" name="sessionID" value="${sessionID}">
+                    <input type="hidden" name="task" value="add">
+                    <input type="submit" class="btn pull-right" value="Add Pic">
+                </form>
+            </div>
     </div>
 </div>
 </body>
+</html>

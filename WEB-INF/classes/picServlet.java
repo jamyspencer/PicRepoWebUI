@@ -11,8 +11,6 @@ import mybeans.PicList;
 public class picServlet extends HttpServlet {
     private    List<CustomSession> the_sessions;
     private final boolean logging = true;
-    private PicList thesePics;
-    String ID;
 
     public void init() throws ServletException  {
         the_sessions = new ArrayList<CustomSession>();
@@ -22,6 +20,8 @@ public class picServlet extends HttpServlet {
 
         CustomSession this_session = null;
         boolean is_valid_session = false;
+        private PicList thesePics;
+        String ID;
         Consumer <String> forwardTo =(url) ->ForwardTo(url,req,res);
 
         if(req.getParameter("logout") != null){
@@ -60,14 +60,6 @@ public class picServlet extends HttpServlet {
             the_sessions.add(this_session);
             is_valid_session = true;
         }
-        //Check to see if the session needs to be authorized
-        if (req.getParameter("whoisit") != null && req.getParameter("passwd") != null) {
-            if (logging) log ("running authenticator");
-            String name = req.getParameter("whoisit").trim();
-            String pw = req.getParameter("passwd").trim();
-            log(this_session.tryLogin(name, pw));
-        }
-
 
         if (req.getParameter("search_term") != null){
             thesePics = new PicList();
@@ -79,9 +71,7 @@ public class picServlet extends HttpServlet {
 
         }
         //authorized user, load upload page
-        if(this_session.isUserAuthenticated()) {
-            forwardTo.accept("Add_Pic.html");
-        }
+
         else {
             req.setAttribute("sessionID",this_session.getID());
             if (thesePics != null && thesePics.getPicQuantity() > 0){
@@ -92,18 +82,47 @@ public class picServlet extends HttpServlet {
 
         return;
     }//end doPost
-/*
 
-    protected void doGet(HttpServletRequest req, HttpServletResponse res)
+    protected void doPost(HttpServletRequest req, HttpServletResponse res)
             throws ServletException, IOException {
+
+        CustomSession this_session = null;
+        boolean is_valid_session = false;
         Consumer <String> forwardTo =(url) ->ForwardTo(url,req,res);
 
-        if (logging) log("doGet activated ");
+        if (req.getParameter("sessionID") != null) {
+            for (int i = 0; i < the_sessions.size(); i++) {
+                if (the_sessions.get(i).getID().equals(req.getParameter("sessionID").trim())) {  //Found an session
+                    if (the_sessions.get(i).isExpired()){
+                        the_sessions.remove(i);
+                    }
+                    else {
+                        this_session =the_sessions.get(i);
+                        is_valid_session = true;
+                        if (logging) log("Session validated " + this_session);
+                    }
+                    break;
+                }
+            }
+        }
 
-        //Check for user logging out
+        if (!is_valid_session){
+            this_session = new CustomSession(req.getRemoteAddr());
+            the_sessions.add(this_session);
+            is_valid_session = true;
+        }
+        //Check to see if the session needs to be authorized
+        if (req.getParameter("whoisit") != null && req.getParameter("passwd") != null) {
+            if (logging) log ("running authenticator");
+            String name = req.getParameter("whoisit").trim();
+            String pw = req.getParameter("passwd").trim();
+            log(this_session.tryLogin(name, pw));
+        }
 
+        if(this_session.isUserAuthenticated()) {
+            forwardTo.accept("Add_Pic.jsp");
+        }
     }
-*/
 
     public void log(String s){
 
