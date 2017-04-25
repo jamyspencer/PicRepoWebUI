@@ -15,7 +15,7 @@ public class PicList implements Serializable{
     static final String USER = "cs4010";
     static final String PASS = "cs4010";
 
-    private ArrayList<Pic> pics;
+    private ArrayList<Pic> pics = new ArrayList<>();
 
     public PicList() {
     }
