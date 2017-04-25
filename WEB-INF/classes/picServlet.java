@@ -61,15 +61,12 @@ public class picServlet extends HttpServlet {
             is_valid_session = true;
         }
         //Check to see if the session needs to be authorized
-        if (!this_session.isUserAuthenticated()) {
-
-            //see if there was a user name and password passed in
-            if (req.getParameter("whoisit") != null && req.getParameter("passwd") != null) {
-                String name = req.getParameter("whoisit").trim();
-                String pw = req.getParameter("passwd").trim();
-                this_session.setUserAuthenticated(UserAuthenticator.tryLogin(name, pw));
-            }
+        if (req.getParameter("whoisit") != null && req.getParameter("passwd") != null) {
+            String name = req.getParameter("whoisit").trim();
+            String pw = req.getParameter("passwd").trim();
+            this_session.tryLogin(name, pw));
         }
+
 
         if (req.getParameter("search_term") != null){
             thesePics = new PicList();
