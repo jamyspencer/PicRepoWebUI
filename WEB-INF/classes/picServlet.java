@@ -64,12 +64,11 @@ public class picServlet extends HttpServlet {
             if (req.getParameter("whoisit") != null && req.getParameter("passwd") != null) {
                 String name = req.getParameter("whoisit").trim();
                 String pw = req.getParameter("passwd").trim();
-
-//                Enter code to authenticate user here
-//                is_authorized_session = true;
+                this_session.setUserAuthenticated(UserAuthenticator.tryLogin(name, pw));
             }
         }
         if (this_session.isUserAuthenticated()){
+            if (logging) log("User authenticated");
             forwardTo.accept("Add_Pic.html");
             return;
         }
@@ -79,12 +78,12 @@ public class picServlet extends HttpServlet {
             synchronized (lock) {
                 thesePics.tryGetList(req.getParameter("search_term").trim());
             }
-
+            if (logging) { log("Num of pics searched: " + String.parseInt(thesePics.getPicQuantity()));
 
         }
         //authorized user, load upload page
         if(this_session.isUserAuthenticated()) {
-            forwardTo.accept("upload.jsp");
+            forwardTo.accept("Add_Pic.html");
         }
         else {
             req.setAttribute("sessionID",this_session.getID());

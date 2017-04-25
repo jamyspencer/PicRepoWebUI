@@ -15,7 +15,7 @@ import java.sql.*;
 
     public UserAuthenticator(){}
 
-    public boolean tryLogin(String login_id, String login_pass){
+    public static boolean tryLogin(String login_id, String login_pass){
         try {
             Class.forName("com.mysql.jdbc.Driver");
             Connection conn = DriverManager.getConnection(DB_URL,USER,PASS);
