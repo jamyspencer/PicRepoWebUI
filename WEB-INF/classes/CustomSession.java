@@ -104,8 +104,8 @@ public class CustomSession {
             rs.close();
             stmt.close();
             conn.close();
-        } catch (Exception e) {
-            return "sql error";
+        } catch (SQLException e) {
+            return "sql error" + e.getMessage();
         }
         return "false";
     }
