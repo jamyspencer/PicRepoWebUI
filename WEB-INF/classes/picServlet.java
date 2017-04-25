@@ -127,12 +127,12 @@ public class picServlet extends HttpServlet {
             try {
                 List<FileItem> multiparts = new ServletFileUpload(
                 new DiskFileItemFactory()).parseRequest(req);
-                final Part filePart = request.getPart("file");
+                final Part filePart = req.getPart("file");
                 final String fileName = getFileName(filePart);
 
                 OutputStream out = null;
                 InputStream filecontent = null;
-                final PrintWriter writer = response.getWriter();
+                final PrintWriter writer = res.getWriter();
 
 
                 out = new FileOutputStream(new File(path + File.separator + fileName));
