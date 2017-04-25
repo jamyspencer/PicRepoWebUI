@@ -40,7 +40,7 @@ public class UserAuthenticator {
         return false;
     }
 
-    public void log(String s){
+    public static void log(String s){
 
         try {
             File outFile = new File("~/tomcat/my_log");
