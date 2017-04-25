@@ -30,7 +30,7 @@ public class PicList implements Serializable{
         return html;
     }
 
-    public boolean tryGetList(String search) {
+    public String tryGetList(String search) {
         try {
             Class.forName("com.mysql.jdbc.Driver");
             Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
@@ -48,10 +48,11 @@ public class PicList implements Serializable{
             rs.close();
             stmt.close();
             conn.close();
-        } catch (Exception e) {
-            return false;
+        } catch (SQLException e) {
+            return e.getMessage();
+        }catch (ClassNotFoundException e) {
+            return e.getMessage();
         }
-
         return true;
     }
 

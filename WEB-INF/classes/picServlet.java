@@ -73,7 +73,7 @@ public class picServlet extends HttpServlet {
             thesePics = new PicList();
             final Object lock = this_session.getID().intern();
             synchronized (lock) {
-                thesePics.tryGetList(req.getParameter("search_term").trim());
+                log(thesePics.tryGetList(req.getParameter("search_term").trim()));
             }
             if (logging) { log("Num of pics searched: " + String.valueOf(thesePics.getPicQuantity()));}
 
