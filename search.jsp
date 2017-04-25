@@ -54,7 +54,7 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
-                    <li><a href="http://hoare.cs.umsl.edu/servlet/j-spencer/PicServlet?logout=true&sessionID=${sessionID}">Logout</a></li>
+                    <li><a href="http://hoare.cs.umsl.edu/servlet/j-spencer/picServlet?logout=true&sessionID=${sessionID}">Logout</a></li>
                 </ul>
 
             </div><!-- /.navbar-collapse -->
@@ -69,7 +69,7 @@
 
         <div class="col-xs-12 col-sm-12 col-md-3 col-lg-2">
             <div class = "row">
-                <form class="form-group" method="get" action="http://hoare.cs.umsl.edu/servlet/j-spencer/PicServlet" >
+                <form class="form-group" method="get" action="http://hoare.cs.umsl.edu/servlet/j-spencer/picServlet" >
                     <h2>Search Pic Database</h2>
                     <input class="field" style="width: 100%; margin-bottom: 10px;"  type="text" name="search_term" hint="Search Term"><br>
                     <input type="hidden" name="sessionID" value="${sessionID}">
@@ -78,7 +78,7 @@
                 </form>
             </div>
             <div class = "row">
-                <form method="get" action="http://hoare.cs.umsl.edu/servlet/j-spencer/PicSearch" >
+                <form method="get" action="http://hoare.cs.umsl.edu/servlet/j-spencer/picServlet" >
                     <h2>Login to Upload</h2>
                     <input class="field" style="width: 100%;" type="text" hint="login id" name="whoisit">
                     <input class="field" style="width: 100%; margin-bottom: 10px;" type="password" hint="Password" name="passwd">
