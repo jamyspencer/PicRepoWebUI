@@ -89,7 +89,7 @@ public class picServlet extends HttpServlet {
 
         CustomSession this_session = null;
         boolean is_valid_session = false;
-        final String UPLOAD_DIR = File(getServletContext().getRealPath("/"));
+//        final String UPLOAD_DIR = File(getServletContext().getRealPath("/"));
                 Consumer <String> forwardTo =(url) ->ForwardTo(url,req,res);
 
         if (req.getParameter("sessionID") != null) {
