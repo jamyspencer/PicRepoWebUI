@@ -29,9 +29,11 @@ public class picServlet extends HttpServlet {
                 if (the_sessions.get(i).getID().equals(ID)) {  //Found an active session
                     if (logging) log("removing: " + the_sessions.get(i).getID());
                     the_sessions.remove(i);
+                    req.removeAttribute("sessionID");
                     break;
                 }
             }
+            req.removeAttribute("logout");
             forwardTo.accept("search.jsp");
             return;
         }
@@ -67,11 +69,7 @@ public class picServlet extends HttpServlet {
                 this_session.setUserAuthenticated(UserAuthenticator.tryLogin(name, pw));
             }
         }
-        if (this_session.isUserAuthenticated()){
-            if (logging) log("User authenticated");
-            forwardTo.accept("Add_Pic.html");
-            return;
-        }
+
         if (req.getParameter("task") != null && req.getParameter("task").trim().equals("search")){
             thesePics = new PicList();
             final Object lock = this_session.getID().intern();
