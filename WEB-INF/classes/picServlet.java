@@ -62,9 +62,10 @@ public class picServlet extends HttpServlet {
         }
         //Check to see if the session needs to be authorized
         if (req.getParameter("whoisit") != null && req.getParameter("passwd") != null) {
+            if (logging) log ("running authenticator");
             String name = req.getParameter("whoisit").trim();
             String pw = req.getParameter("passwd").trim();
-            this_session.tryLogin(name, pw);
+            log(this_session.tryLogin(name, pw));
         }
 
 

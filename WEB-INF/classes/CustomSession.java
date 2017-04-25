@@ -88,8 +88,7 @@ public class CustomSession {
     static final String PASS = "cs4010";
 
 
-    public boolean tryLogin(String login_id, String login_pass) {
-        log("running authenticator");
+    public String tryLogin(String login_id, String login_pass) {
         try {
             Class.forName("com.mysql.jdbc.Driver");
             Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
@@ -97,35 +96,18 @@ public class CustomSession {
             String this_query = " SELECT loginpass FROM jcs436login WHERE loginid='" + login_id + ";";
             ResultSet rs = stmt.executeQuery(this_query);
             if (rs.next()) {
-                log("the password is: " + rs.getString("loginpass"));
                 if (rs.getString("loginpass").equals(login_pass)) {
                     this.userAuthenticated = true;
-                    return true;
+                    return rs.getString("loginpass");
                 }
             }
             rs.close();
             stmt.close();
             conn.close();
         } catch (Exception e) {
-            log("SQL error in user authenticator");
-            return false;
+            return "sql error";
         }
-
-        return false;
-    }
-
-
-    public void log(String s){
-
-        try {
-            File outFile = new File("~/tomcat/sql_log");
-            outFile.createNewFile();
-            PrintWriter fileWriter = new PrintWriter(new FileOutputStream(outFile,true));
-            fileWriter.println(s+" at: " + new java.util.Date(System.currentTimeMillis()).toString());
-            fileWriter.close();
-        } catch (IOException ex) {
-
-        }
+        return "false";
     }
 
 }
