@@ -70,11 +70,15 @@ public class picServlet extends HttpServlet {
             }
         }
         if (this_session.isUserAuthenticated()){
-            forwardTo.accept(Add_Pic.html);
+            forwardTo.accept("Add_Pic.html");
+            return;
         }
         if (req.getParameter("task") != null && req.getParameter("task").trim().equals("search")){
             thesePics = new PicList();
-            thesePics.tryGetList(req.getParameter("search_term").trim());
+            final Object lock = this_session.getID().intern();
+            synchronized (lock) {
+                thesePics.tryGetList(req.getParameter("search_term").trim());
+            }
 
 
         }
@@ -82,7 +86,11 @@ public class picServlet extends HttpServlet {
         if(this_session.isUserAuthenticated()) {
             forwardTo.accept("upload.jsp");
         }
-        else forwardTo.accept("search.jsp");
+        else {
+            req.setAttribute("sessionID",this_session.getID());
+            if (thesePics.size() > 0){ setAttribute("picHTML", thesePics.sendPics()); }
+            forwardTo.accept("search.jsp");
+        }
 
         return;
     }//end doPost

@@ -90,7 +90,7 @@
         </div>
 
         <div id="pic_container" class="col-xs-12 col-sm-12 col-md-9 col-lg-10">
-
+            ${picHTML}
         </div>
 
 
