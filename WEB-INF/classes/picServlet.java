@@ -102,7 +102,7 @@ public class picServlet extends HttpServlet {
             // Create a new file upload handler
             ServletFileUpload upload = new ServletFileUpload(factory);
             // Parse the request
-            List<FileItem> items = upload.parseRequest(request);
+            List<FileItem> items = upload.parseRequest(req);
 
             // Process the uploaded items
             Iterator<FileItem> iter = items.iterator();
@@ -110,7 +110,7 @@ public class picServlet extends HttpServlet {
                 FileItem item = iter.next();
 
                 if (item.isFormField()) {
-                    if (item.getFieldName.equals("sessionID")) session_id = item.getString();
+                    if (item.getFieldName().equals("sessionID")) session_id = item.getString();
                 } else {
                     String fileName = item.getName();
                     File uploadedFile = new File(getServletContext().getRealPath("/") + "pics/" + fileName);
