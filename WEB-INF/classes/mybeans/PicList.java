@@ -31,8 +31,10 @@ public class PicList implements Serializable{
                     html = html + "<div class= 'row'";
                 }
                 html = html +
-                        "<div class='col-sm-6, col-md-4 img-thumbnail'> " +
-                            "<img class='img-responsive, img-rounded' src='pics/" + pics.get(i).getFileName() +"'>" +
+                        "<div class='col-sm-6, col-md-4 '> " +
+                            "<div class='img-thumbnail'>" +
+                                "<img class='img-responsive, img-rounded' src='pics/" + pics.get(i).getFileName() +"'>" +
+                            "</div>"
                         "</div>";
                 if(i == pics.size() - 1){
                     html = html + "</div>";
