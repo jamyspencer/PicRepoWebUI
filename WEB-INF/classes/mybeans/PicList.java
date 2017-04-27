@@ -24,12 +24,20 @@ public class PicList implements Serializable{
         String html = "";
         if (pics != null) {
             for (int i = 0; i < pics.size(); i++) {
+                if (i != 0 && i % 3 = 0){
+                    html = html + "</div>"
+                }
+                if (i % 3 = 0){
+                    html = html + "<div class= 'row'";
+                }
                 html = html +
                         "<div class='col-sm-6, col-md-4'> " +
-                            "<div class='thumbnail'>" +
-                                "<img class='img-responsive, img-rounded' src='pics/" + pics.get(i).getFileName() +"'>" +
-                            "</div>" +
+                            "<img class='img-responsive, img-rounded' src='pics/" + pics.get(i).getFileName() +"'>" +
                         "</div>";
+                if(i = pics.size() - 1){
+                    html = html + "</div>"
+                }
+
             }
         }
         return html;
