@@ -127,21 +127,18 @@ public class picServlet extends HttpServlet {
                 session_id = req.getParameter("sessionID").trim();
             }
         }
+        if (logging) log ("sessionID = " + session_id);
 
         if (!session_id.equals("error")) {
             for (int i = 0; i < the_sessions.size(); i++) {
-                if (the_sessions.get(i).getID().equals(session_id)) {  //Found an session
-                    if (the_sessions.get(i).isExpired()){
-                        the_sessions.remove(i);
-                        if (logging) log("Session invalidated " + this_session);
-                        return;
-
-                    }
-                    else {
-                        this_session =the_sessions.get(i);
-                        is_valid_session = true;
-                        if (logging) log("Session validated " + this_session);
-                    }
+                if (the_sessions.get(i).isExpired()) {
+                    the_sessions.remove(i);
+                    if (logging) log("Session invalidated " + this_session);
+                }
+                else if (the_sessions.get(i).getID().equals(session_id)) {  //Found an session
+                    this_session =the_sessions.get(i);
+                    is_valid_session = true;
+                    if (logging) log("Session validated " + this_session);
                     break;
                 }
             }
