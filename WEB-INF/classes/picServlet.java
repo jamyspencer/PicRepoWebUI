@@ -166,12 +166,16 @@ public class picServlet extends HttpServlet {
             }
         }
 
-        if (this_session.isUserAuthenticated() && is_adding_pic){
+        if (this_session != null && this_session.isUserAuthenticated() && is_adding_pic){
             try{
                 File uploadedFile = new File(getServletContext().getRealPath("/") + "pics/" + fileName);
                 this_upload.write(uploadedFile);
-                log(PicList.tryAddPic(fileName, tag));
+                final Object lock = this_session.getID().intern();
 
+                synchronized (lock) {
+                    PicList thesePics = new PicList();
+                    log(thesePics.tryAddPic(fileName, tag));
+                }
             }catch(Exception ex){
                 if (logging) log(ex.getMessage());
             }

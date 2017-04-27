@@ -71,7 +71,7 @@ public class PicList implements Serializable{
             ResultSet rs = stmt.executeQuery(this_query);
 
         } catch (SQLException e) {
-            return e.getMessage();
+            return "sql insertion failed: " + e.getMessage();
         }catch (ClassNotFoundException e) {
             return e.getMessage();
         }
