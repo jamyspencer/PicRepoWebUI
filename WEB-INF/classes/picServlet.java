@@ -170,7 +170,7 @@ public class picServlet extends HttpServlet {
             try{
                 File uploadedFile = new File(getServletContext().getRealPath("/") + "pics/" + fileName);
                 this_upload.write(uploadedFile);
-                log(tryAddPic(fileName, tag));
+                log(PicList.tryAddPic(fileName, tag));
 
             }catch(Exception ex){
                 if (logging) log(ex.getMessage());
