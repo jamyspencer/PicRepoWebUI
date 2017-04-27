@@ -123,7 +123,7 @@ public class picServlet extends HttpServlet {
 
         //Check for incoming pic upload
         if (req.getParameter("filename") != null && req.getParameter("tag") != null){
-            String fileName;
+            String path = getServletContext().getRealPath("/");
             try {
                 List<FileItem> multiparts = new ServletFileUpload(
                 new DiskFileItemFactory()).parseRequest(req);
@@ -148,7 +148,7 @@ public class picServlet extends HttpServlet {
                 //File uploaded successfully
                 req.setAttribute("message", "File Uploaded Successfully");
             } catch (Exception ex) {
-                request.setAttribute("message", "File Upload Failed");
+                req.setAttribute("message", "File Upload Failed");
                 log(ex.getMessage());
             }
 

@@ -76,8 +76,6 @@
                     <input id="file" class="field" style="width: 100%; margin-bottom: 10px;"  type="file" name="file">
                     <label for="tag">Searchable Tag</label>
                     <input id="tag" class="field" style="width: 100%; margin-bottom: 10px;"  type="text" name="tag">
-                    <label for="location">File Location</label>
-                    <input id="location" class="field" style="width: 100%; margin-bottom: 10px;"  type="text" name="location">
                     <input type="hidden" name="sessionID" value="${sessionID}">
                     <input type="hidden" name="task" value="add">
                     <input type="submit" class="btn pull-right" value="Add Pic">
