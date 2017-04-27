@@ -92,7 +92,7 @@ public class picServlet extends HttpServlet {
         Consumer <String> forwardTo =(url) ->ForwardTo(url,req,res);
         String session_id = "error";
 
-        if (request.getContentType() != null && request.getContentType().toLowerCase().indexOf("multipart/form-data") > -1 ) {
+        if (req.getContentType() != null && req.getContentType().toLowerCase().indexOf("multipart/form-data") > -1 ) {
             // Create a factory for disk-based file items
             DiskFileItemFactory factory = new DiskFileItemFactory();
             // Configure a repository (to ensure a secure temp location is used)
