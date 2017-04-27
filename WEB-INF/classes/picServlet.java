@@ -97,6 +97,8 @@ public class picServlet extends HttpServlet {
                 if (the_sessions.get(i).getID().equals(req.getParameter("sessionID").trim())) {  //Found an session
                     if (the_sessions.get(i).isExpired()){
                         the_sessions.remove(i);
+                        if (logging) log("Session invalidated " + this_session);
+
                     }
                     else {
                         this_session =the_sessions.get(i);
@@ -108,11 +110,6 @@ public class picServlet extends HttpServlet {
             }
         }
 
-        if (!is_valid_session){
-            this_session = new CustomSession(req.getRemoteAddr());
-            the_sessions.add(this_session);
-            is_valid_session = true;
-        }
         //Check to see if the session needs to be authorized
         if (req.getParameter("whoisit") != null && req.getParameter("passwd") != null) {
             if (logging) log ("running authenticator");
@@ -157,10 +154,12 @@ public class picServlet extends HttpServlet {
 
             log (PicList.tryAddPic(fileName, req.getParameter("tag").trim()));
         }
-
+        req.setAttribute("sessionID",this_session.getID());
         if(this_session.isUserAuthenticated()) {
-            req.setAttribute("sessionID",this_session.getID());
             forwardTo.accept("Add_Pic.jsp");
+        }
+        else{
+            forwardTo.accept("search.jsp");
         }
     }
 
