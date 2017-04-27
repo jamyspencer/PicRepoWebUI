@@ -29,7 +29,7 @@ public class PicList implements Serializable{
                     "<div class='col-sm-6, col-md-4 '> " +
                         "<div class='img-thumbnail'>" +
                             "<img class='img-responsive, img-rounded' src='pics/" + pics.get(i).getFileName() +"'>" +
-                        "</div>"
+                        "</div>" +
                     "</div>";
             }
         }
