@@ -98,6 +98,7 @@ public class picServlet extends HttpServlet {
                     if (the_sessions.get(i).isExpired()){
                         the_sessions.remove(i);
                         if (logging) log("Session invalidated " + this_session);
+                        return;
 
                     }
                     else {
@@ -108,6 +109,10 @@ public class picServlet extends HttpServlet {
                     break;
                 }
             }
+        }
+        else{
+            if (logging) log ("sessionID is null");
+            return;
         }
 
         //Check to see if the session needs to be authorized
