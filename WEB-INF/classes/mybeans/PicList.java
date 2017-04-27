@@ -67,7 +67,7 @@ public class PicList implements Serializable{
             Class.forName("com.mysql.jdbc.Driver");
             Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
             Statement stmt = conn.createStatement();
-            String this_query = " INSERT INTO jcs436Pics(filename, tag) VALUES('" + fileName + "' '" + tag + "');";
+            String this_query = " INSERT INTO jcs436Pics(filename, tag) VALUES('" + fileName + "', '" + tag + "');";
             stmt.executeUpdate(this_query);
 
         } catch (SQLException e) {
