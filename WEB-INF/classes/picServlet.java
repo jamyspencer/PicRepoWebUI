@@ -93,6 +93,7 @@ public class picServlet extends HttpServlet {
         Consumer <String> forwardTo =(url) ->ForwardTo(url,req,res);
         String session_id = "error";
         String tag;
+        String fileName;
         FileItem this_upload;
 
         if (req.getContentType() != null && req.getContentType().toLowerCase().indexOf("multipart/form-data") > -1 ) {
@@ -121,7 +122,7 @@ public class picServlet extends HttpServlet {
                         else if (item.getFieldName().equals("tag")) tag = item.getString();
 
                     } else {
-                        String fileName = item.getName();
+                        fileName = item.getName();
                         this_upload = item;
                     }
                 }
@@ -168,7 +169,7 @@ public class picServlet extends HttpServlet {
         if (this_session.isUserAuthenticated() && is_adding_pic){
             try{
                 File uploadedFile = new File(getServletContext().getRealPath("/") + "pics/" + fileName);
-                item.write(uploadedFile);
+                this_upload.write(uploadedFile);
                 log(tryAddPic(fileName, tag));
 
             }catch(Exception ex){
