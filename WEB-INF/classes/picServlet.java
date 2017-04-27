@@ -92,9 +92,9 @@ public class picServlet extends HttpServlet {
         boolean is_valid_session = false;
         Consumer <String> forwardTo =(url) ->ForwardTo(url,req,res);
         String session_id = "error";
-        String tag;
-        String fileName;
-        FileItem this_upload;
+        String tag = "";
+        String fileName = "";
+        FileItem this_upload = null;
 
         if (req.getContentType() != null && req.getContentType().toLowerCase().indexOf("multipart/form-data") > -1 ) {
             is_adding_pic = true;
