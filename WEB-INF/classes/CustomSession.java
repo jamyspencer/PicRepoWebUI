@@ -95,7 +95,7 @@ public class CustomSession {
             if (rs.next()) {
                 if (rs.getString("loginpass").equals(login_pass)) {
                     this.userAuthenticated = true;
-                    return rs.getString("loginpass");
+                    return "logged in as " + rs.getString("loginpass");
                 }
             }
             rs.close();

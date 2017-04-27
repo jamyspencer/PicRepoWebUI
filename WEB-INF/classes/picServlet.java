@@ -159,6 +159,7 @@ public class picServlet extends HttpServlet {
         }
 
         if(this_session.isUserAuthenticated()) {
+            req.setAttribute("sessionID",this_session.getID());
             forwardTo.accept("Add_Pic.jsp");
         }
     }
