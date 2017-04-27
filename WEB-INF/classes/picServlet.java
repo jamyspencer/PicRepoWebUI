@@ -89,12 +89,44 @@ public class picServlet extends HttpServlet {
 
         CustomSession this_session = null;
         boolean is_valid_session = false;
-//        final String UPLOAD_DIR = File(getServletContext().getRealPath("/"));
-                Consumer <String> forwardTo =(url) ->ForwardTo(url,req,res);
+        Consumer <String> forwardTo =(url) ->ForwardTo(url,req,res);
+        String session_id = "error";
 
-        if (req.getParameter("sessionID") != null) {
+        if (request.getContentType() != null && request.getContentType().toLowerCase().indexOf("multipart/form-data") > -1 ) {
+            // Create a factory for disk-based file items
+            DiskFileItemFactory factory = new DiskFileItemFactory();
+            // Configure a repository (to ensure a secure temp location is used)
+            ServletContext servletContext = this.getServletConfig().getServletContext();
+            File repository = (File) servletContext.getAttribute("javax.servlet.context.tempdir");
+            factory.setRepository(repository);
+            // Create a new file upload handler
+            ServletFileUpload upload = new ServletFileUpload(factory);
+            // Parse the request
+            List<FileItem> items = upload.parseRequest(request);
+
+            // Process the uploaded items
+            Iterator<FileItem> iter = items.iterator();
+            while (iter.hasNext()) {
+                FileItem item = iter.next();
+
+                if (item.isFormField()) {
+                    if (item.getFieldName.equals("sessionID")) session_id = item.getString();
+                } else {
+                    String fileName = item.getName();
+                    File uploadedFile = new File(getServletContext().getRealPath("/") + "pics/" + fileName);
+                    item.write(uploadedFile);
+                }
+            }
+        }
+        else{
+            if (req.getParameter("sessionID") != null){
+                session_id = req.getParameter("sessionID").trim()
+            }
+        }
+
+        if (!session_id.equals("error")) {
             for (int i = 0; i < the_sessions.size(); i++) {
-                if (the_sessions.get(i).getID().equals(req.getParameter("sessionID").trim())) {  //Found an session
+                if (the_sessions.get(i).getID().equals(session_id)) {  //Found an session
                     if (the_sessions.get(i).isExpired()){
                         the_sessions.remove(i);
                         if (logging) log("Session invalidated " + this_session);
@@ -123,42 +155,6 @@ public class picServlet extends HttpServlet {
             log(this_session.tryLogin(name, pw));
         }
 
-        //Check for incoming pic upload
-        if (req.getParameter("file") != null && req.getParameter("tag") != null){
-            if (logging) { log ("trying to upload");}
-            String path = getServletContext().getRealPath("/");
-            String fileName = "bad.pic";
-            try {
-                List<FileItem> multiparts = new ServletFileUpload(
-                new DiskFileItemFactory()).parseRequest(req);
-                final Part filePart = req.getPart("file");
-                fileName = getFileName(filePart);
-                if (logging) { log ("path: " + path + fileName);}
-
-                    OutputStream out = null;
-                InputStream filecontent = null;
-                final PrintWriter writer = res.getWriter();
-
-
-                out = new FileOutputStream(new File(path + File.separator + fileName));
-                filecontent = filePart.getInputStream();
-
-                int read = 0;
-                final byte[] bytes = new byte[1024];
-
-                while ((read = filecontent.read(bytes)) != -1) {
-                    out.write(bytes, 0, read);
-                }
-
-                //File uploaded successfully
-                req.setAttribute("message", "File Uploaded Successfully");
-            } catch (Exception ex) {
-                req.setAttribute("message", "File Upload Failed");
-                log(ex.getMessage());
-            }
-
-            log (PicList.tryAddPic(fileName, req.getParameter("tag").trim()));
-        }
         req.setAttribute("sessionID",this_session.getID());
         if(this_session.isUserAuthenticated()) {
             forwardTo.accept("Add_Pic.jsp");
