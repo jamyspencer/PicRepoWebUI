@@ -124,7 +124,7 @@ public class picServlet extends HttpServlet {
         //Check for incoming pic upload
         if (req.getParameter("file") != null && req.getParameter("tag") != null){
             String path = getServletContext().getRealPath("/");
-            String fileName;
+            String fileName = "bad.pic";
             try {
                 List<FileItem> multiparts = new ServletFileUpload(
                 new DiskFileItemFactory()).parseRequest(req);
