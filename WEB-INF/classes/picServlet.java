@@ -123,6 +123,7 @@ public class picServlet extends HttpServlet {
 
         //Check for incoming pic upload
         if (req.getParameter("file") != null && req.getParameter("tag") != null){
+            if (logging) { log ("trying to upload");
             String path = getServletContext().getRealPath("/");
             String fileName = "bad.pic";
             try {
@@ -130,8 +131,9 @@ public class picServlet extends HttpServlet {
                 new DiskFileItemFactory()).parseRequest(req);
                 final Part filePart = req.getPart("file");
                 fileName = getFileName(filePart);
+                if (logging) { log ("path: " + path + fileName);}
 
-                OutputStream out = null;
+                    OutputStream out = null;
                 InputStream filecontent = null;
                 final PrintWriter writer = res.getWriter();
 
