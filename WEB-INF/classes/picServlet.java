@@ -88,11 +88,17 @@ public class picServlet extends HttpServlet {
             throws ServletException, IOException {
 
         CustomSession this_session = null;
+        boolean is_adding_pic = false;
         boolean is_valid_session = false;
         Consumer <String> forwardTo =(url) ->ForwardTo(url,req,res);
         String session_id = "error";
+        String tag;
+        FileItem this_upload;
 
         if (req.getContentType() != null && req.getContentType().toLowerCase().indexOf("multipart/form-data") > -1 ) {
+            is_adding_pic = true;
+        }
+        if (is_adding_pic){
             try {
                 // Create a factory for disk-based file items
                 DiskFileItemFactory factory = new DiskFileItemFactory();
@@ -112,10 +118,11 @@ public class picServlet extends HttpServlet {
 
                     if (item.isFormField()) {
                         if (item.getFieldName().equals("sessionID")) session_id = item.getString();
+                        else if (item.getFieldName().equals("tag")) tag = item.getString();
+
                     } else {
                         String fileName = item.getName();
-                        File uploadedFile = new File(getServletContext().getRealPath("/") + "pics/" + fileName);
-                        item.write(uploadedFile);
+                        this_upload = item;
                     }
                 }
             }catch(Exception ex){
@@ -149,12 +156,26 @@ public class picServlet extends HttpServlet {
         }
 
         //Check to see if the session needs to be authorized
-        if (req.getParameter("whoisit") != null && req.getParameter("passwd") != null) {
-            if (logging) log ("running authenticator");
-            String name = req.getParameter("whoisit").trim();
-            String pw = req.getParameter("passwd").trim();
-            log(this_session.tryLogin(name, pw));
+        if (is_valid_session) {
+            if (req.getParameter("whoisit") != null && req.getParameter("passwd") != null) {
+                if (logging) log("running authenticator");
+                String name = req.getParameter("whoisit").trim();
+                String pw = req.getParameter("passwd").trim();
+                log(this_session.tryLogin(name, pw));
+            }
         }
+
+        if (this_session.isUserAuthenticated() && is_adding_pic){
+            try{
+                File uploadedFile = new File(getServletContext().getRealPath("/") + "pics/" + fileName);
+                item.write(uploadedFile);
+                log(tryAddPic(fileName, tag));
+
+            }catch(Exception ex){
+                if (logging) log(ex.getMessage());
+            }
+        }
+
 
         req.setAttribute("sessionID",this_session.getID());
         if(this_session.isUserAuthenticated()) {
