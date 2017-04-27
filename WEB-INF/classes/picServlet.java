@@ -93,29 +93,33 @@ public class picServlet extends HttpServlet {
         String session_id = "error";
 
         if (req.getContentType() != null && req.getContentType().toLowerCase().indexOf("multipart/form-data") > -1 ) {
-            // Create a factory for disk-based file items
-            DiskFileItemFactory factory = new DiskFileItemFactory();
-            // Configure a repository (to ensure a secure temp location is used)
-            ServletContext servletContext = this.getServletConfig().getServletContext();
-            File repository = (File) servletContext.getAttribute("javax.servlet.context.tempdir");
-            factory.setRepository(repository);
-            // Create a new file upload handler
-            ServletFileUpload upload = new ServletFileUpload(factory);
-            // Parse the request
-            List<FileItem> items = upload.parseRequest(req);
+            try {
+                // Create a factory for disk-based file items
+                DiskFileItemFactory factory = new DiskFileItemFactory();
+                // Configure a repository (to ensure a secure temp location is used)
+                ServletContext servletContext = this.getServletConfig().getServletContext();
+                File repository = (File) servletContext.getAttribute("javax.servlet.context.tempdir");
+                factory.setRepository(repository);
+                // Create a new file upload handler
+                ServletFileUpload upload = new ServletFileUpload(factory);
+                // Parse the request
+                List<FileItem> items = upload.parseRequest(req);
 
-            // Process the uploaded items
-            Iterator<FileItem> iter = items.iterator();
-            while (iter.hasNext()) {
-                FileItem item = iter.next();
+                // Process the uploaded items
+                Iterator<FileItem> iter = items.iterator();
+                while (iter.hasNext()) {
+                    FileItem item = iter.next();
 
-                if (item.isFormField()) {
-                    if (item.getFieldName().equals("sessionID")) session_id = item.getString();
-                } else {
-                    String fileName = item.getName();
-                    File uploadedFile = new File(getServletContext().getRealPath("/") + "pics/" + fileName);
-                    item.write(uploadedFile);
+                    if (item.isFormField()) {
+                        if (item.getFieldName().equals("sessionID")) session_id = item.getString();
+                    } else {
+                        String fileName = item.getName();
+                        File uploadedFile = new File(getServletContext().getRealPath("/") + "pics/" + fileName);
+                        item.write(uploadedFile);
+                    }
                 }
+            }catch(Exception ex){
+                if (logging) log(ex.getMessage());
             }
         }
         else{
