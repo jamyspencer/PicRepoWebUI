@@ -120,7 +120,7 @@ public class picServlet extends HttpServlet {
         }
         else{
             if (req.getParameter("sessionID") != null){
-                session_id = req.getParameter("sessionID").trim()
+                session_id = req.getParameter("sessionID").trim();
             }
         }
 
