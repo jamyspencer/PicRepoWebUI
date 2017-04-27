@@ -123,7 +123,7 @@ public class picServlet extends HttpServlet {
 
         //Check for incoming pic upload
         if (req.getParameter("file") != null && req.getParameter("tag") != null){
-            if (logging) { log ("trying to upload");
+            if (logging) { log ("trying to upload");}
             String path = getServletContext().getRealPath("/");
             String fileName = "bad.pic";
             try {
