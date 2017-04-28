@@ -24,13 +24,13 @@ public class infoServlet extends HttpServlet {
         final String ROOT_PATH = "/usr/share/tomcat/webapps/j-spencer/";
         final String CLASSES_PATH = "WEB-INF/classes/";
         ServletContext context = getServletContext();
-
+        String filename =  "error";
         res.setContentType("text/html");
 
 
         if (req.getParameter("files") != null) {
             if (req.getParameter("files").trim().equals("servlet")) {
-                String filename = CLASSES_PATH + "picServlet.java";
+                filename = CLASSES_PATH + "picServlet.java";
             }
         }
 
@@ -39,7 +39,7 @@ public class infoServlet extends HttpServlet {
         if (is != null) {
             InputStreamReader isr = new InputStreamReader(is);
             BufferedReader reader = new BufferedReader(isr);
-            PrintWriter writer = response.getWriter();
+            PrintWriter writer = res.getWriter();
             String text;
 
             // We read the file line by line and later will be displayed on the
@@ -49,7 +49,7 @@ public class infoServlet extends HttpServlet {
             }
         }
     }
-    
+
     void ForwardTo(String url,HttpServletRequest req, HttpServletResponse res) {
         RequestDispatcher dispatcher= req.getRequestDispatcher(url);
         try {
