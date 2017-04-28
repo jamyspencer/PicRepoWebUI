@@ -13,12 +13,16 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 
 public class infoServlet extends HttpServlet {
+
     private static final String ROOT_PATH = getServletContext().getRealPath("/");
     private static final String CLASSES_PATH = ROOT_PATH + "WEB-INF/classes/";
 
     protected void doPost(HttpServletRequest req, HttpServletResponse res)
             throws ServletException, IOException {
 
+        Consumer <String> forwardTo =(url) ->ForwardTo(url,req,res);
+
+        
         if (req.getParameter("files") != null) {
             if (req.getParameter("files").trim().equals("servlet")) {
                 forwardTo.accept(CLASSES_PATH + "picServlet.java");
@@ -26,5 +30,18 @@ public class infoServlet extends HttpServlet {
         }
 
         return;
+    }
+
+    void ForwardTo(String url,HttpServletRequest req, HttpServletResponse res) {
+        RequestDispatcher dispatcher= req.getRequestDispatcher(url);
+        try {
+            dispatcher.forward(req, res);
+        } catch (IOException|ServletException is) {
+            log(" req from " + url + " not forwarded at ");
+            try {
+                throw is;
+            } catch (Exception e) {
+            }
+        }
     }
 }
