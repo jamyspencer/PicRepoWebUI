@@ -27,7 +27,6 @@
             border: 2px solid #ccc;
             border-radius: 4px;
             padding: 5px;
-            min-height: 245px;
             margin: 5px;
         }
         .btn{

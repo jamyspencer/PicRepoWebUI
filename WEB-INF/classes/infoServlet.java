@@ -32,6 +32,12 @@ public class infoServlet extends HttpServlet {
             if (req.getParameter("files").trim().equals("servlet")) {
                 filename = CLASSES_PATH + "picServlet.java";
             }
+            else if (req.getParameter("files").trim().equals("search.jsp")) {
+                filename = "search.jsp";
+            }
+            else if (req.getParameter("files").trim().equals("Add_Pic.jsp")) {
+                filename = "Add_Pic.jsp";
+            }
         }
 
 
