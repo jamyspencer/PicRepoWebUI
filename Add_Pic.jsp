@@ -27,7 +27,6 @@
             border: 2px solid #ccc;
             border-radius: 4px;
             padding: 5px;
-            min-height: 245px;
             margin: 5px;
         }
         .btn{
@@ -82,6 +81,7 @@
                     <input type="hidden" name="sessionID" value="${sessionID}">
                     <input type="hidden" name="task" value="add">
                     <input type="submit" class="btn pull-right" value="Add Pic">
+                    <span style="clear:both"/>
                 </form>
             </div>
         </div>
