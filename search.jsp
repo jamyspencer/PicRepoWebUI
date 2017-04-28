@@ -76,7 +76,7 @@
                     <input type="hidden" name="sessionID" value="${sessionID}">
                     <input type="hidden" name="task" value="search">
                     <input type="submit" class="btn pull-right" value="Search">
-                    <span style="clear:both"/>
+                    <div style="clear:both;"></div>
 
                 </form>
             </div>
@@ -90,8 +90,7 @@
                     <input type="hidden" name="sessionID" value="${sessionID}">
                     <input type="hidden" name="task" value="login">
                     <input type="submit" class="btn pull-right" value="Login">
-                    <span style="clear:both"/>
-
+                    <div style="clear:both;"></div>
                 </form>
             </div>
             <div class = "row">
@@ -141,7 +140,7 @@
                         </label>
                     </div>
                     <input type="submit" class="btn pull-right" value="Search">
-                    <span style="clear:both"/>
+                    <div style="clear:both;"></div>
                 </form>
             </div>
         </div>

@@ -81,7 +81,7 @@
                     <input type="hidden" name="sessionID" value="${sessionID}">
                     <input type="hidden" name="task" value="add">
                     <input type="submit" class="btn pull-right" value="Add Pic">
-                    <span style="clear:both"/>
+                    <div style="clear:both;"></div>
                 </form>
             </div>
         </div>
