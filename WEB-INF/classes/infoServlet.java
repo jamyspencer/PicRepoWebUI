@@ -30,30 +30,42 @@ public class infoServlet extends HttpServlet {
 
         if (req.getParameter("files") != null) {
             if (req.getParameter("files").trim().equals("servlet")) {
-                filename = CLASSES_PATH + "picServlet.java";
+                filename = ROOT_PATH + CLASSES_PATH + "picServlet.java";
             }
             else if (req.getParameter("files").trim().equals("search.jsp")) {
-                filename = "search.jsp";
+                filename = ROOT_PATH + "search.jsp";
             }
             else if (req.getParameter("files").trim().equals("Add_Pic.jsp")) {
-                filename = "Add_Pic.jsp";
+                filename = ROOT_PATH + "Add_Pic.jsp";
             }
         }
 
 
-        InputStream is = context.getResourceAsStream(filename);
-        if (is != null) {
-            InputStreamReader isr = new InputStreamReader(is);
-            BufferedReader reader = new BufferedReader(isr);
-            PrintWriter writer = res.getWriter();
-            String text;
+        PrintWriter pw = res.getWriter();
+        FileReader fr = new FileReader(filename);
 
-            // We read the file line by line and later will be displayed on the
-            // browser page.
-            while ((text = reader.readLine()) != null) {
-                writer.println(text + "</br>");
+        int k;
+        char ch;
+
+        while( (k = fr.read()) != -1 )
+        {
+            ch = (char) k;
+
+            if(k == 13) 		 // 13 is ASCII value of new line character
+                pw.print("<BR>");
+            else if(ch == '<')
+                pw.print("&lt;");
+            else if(ch == '>')
+                pw.print("&gt;");
+            else if(ch == ' '){
+                pw.print("&nbsp");
             }
+            else
+                pw.print(ch);
         }
+
+        fr.close();
+        pw.close();
     }
 
     void ForwardTo(String url,HttpServletRequest req, HttpServletResponse res) {
