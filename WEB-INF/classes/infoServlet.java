@@ -21,7 +21,7 @@ public class infoServlet extends HttpServlet {
             throws ServletException, IOException {
 
         Consumer <String> forwardTo =(url) ->ForwardTo(url,req,res);
-        final String ROOT_PATH = getServletContext().getRealPath("/");
+        final String ROOT_PATH = "/usr/share/tomcat/webapps/j-spencer/";
         final String CLASSES_PATH = ROOT_PATH + "WEB-INF/classes/";
 
         if (req.getParameter("files") != null) {
