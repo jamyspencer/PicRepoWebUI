@@ -32,11 +32,23 @@ public class infoServlet extends HttpServlet {
             if (req.getParameter("files").trim().equals("servlet")) {
                 filename = ROOT_PATH + CLASSES_PATH + "picServlet.java";
             }
+            else if (req.getParameter("files").trim().equals("Pic.java")) {
+                filename = ROOT_PATH + CLASSES_PATH + "mybeans/Pic.java";
+            }
+            else if (req.getParameter("files").trim().equals("PicList.java")) {
+                filename = ROOT_PATH + CLASSES_PATH + "mybeans/PicList.java";
+            }
+            else if (req.getParameter("files").trim().equals("CustomSession.java")) {
+                filename = ROOT_PATH + CLASSES_PATH + "CustomSession.java";
+            }
             else if (req.getParameter("files").trim().equals("search.jsp")) {
                 filename = ROOT_PATH + "search.jsp";
             }
             else if (req.getParameter("files").trim().equals("Add_Pic.jsp")) {
                 filename = ROOT_PATH + "Add_Pic.jsp";
+            }
+            else if (req.getParameter("files").trim().equals("web.xml")) {
+                filename = ROOT_PATH + "WEB-INF/web.xml";
             }
         }
 

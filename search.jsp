@@ -112,6 +112,30 @@
                             Add_Pic.jsp
                         </label>
                     </div>
+                    <div class="form-check">
+                        <label class="form-check-label">
+                            <input class="form-check-input" type="radio" name="files"  value="web.xml">
+                            web.xml
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <label class="form-check-label">
+                            <input class="form-check-input" type="radio" name="files"  value="Pic.java">
+                            Pic.java
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <label class="form-check-label">
+                            <input class="form-check-input" type="radio" name="files"  value="PicList.java">
+                            PicList.java
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <label class="form-check-label">
+                            <input class="form-check-input" type="radio" name="files"  value="CustomSession.java">
+                            CustomSession.java
+                        </label>
+                    </div>
                     <input type="submit" class="btn pull-right" value="Search">
                 </form>
             </div>
