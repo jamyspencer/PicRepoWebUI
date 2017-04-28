@@ -92,6 +92,31 @@
                 </form>
             </div>
         </div>
+        <div class = "row">
+            <form class="form-group" method="get" action="http://hoare.cs.umsl.edu/servlet/j-spencer/infoServlet" >
+                <h2>Project Details</h2>
+                <label for="files">Select File</label>
+                <div id="files" class="form-check">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="radio" name="files"  value="servlet" checked>
+                        Servlet
+                    </label>
+                </div>
+                <div class="form-check">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="radio" name="files"  value="search.jsp">
+                        search.jsp
+                    </label>
+                </div>
+                <div class="form-check">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="radio" name="files"  value="Add_Pic.jsp">
+                        Add_Pic.jsp
+                    </label>
+                </div>
+                <input type="submit" class="btn pull-right" value="Search">
+            </form>
+        </div>
 
         <div id="pic_container" class="col-xs-12 col-sm-12 col-md-9 col-lg-10">
             ${picHTML}

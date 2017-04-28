@@ -7,8 +7,16 @@
         <servlet-name>picServlet</servlet-name>
         <servlet-class>picServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>infoServlet</servlet-name>
+        <servlet-class>infoServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>picServlet</servlet-name>
         <url-pattern>/picServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>infoServlet</servlet-name>
+        <url-pattern>/infoServlet</url-pattern>
     </servlet-mapping>
 </web-app>

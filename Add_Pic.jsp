@@ -84,6 +84,7 @@
                     <input type="submit" class="btn pull-right" value="Add Pic">
                 </form>
             </div>
+        </div>
     </div>
 </div>
 </body>
