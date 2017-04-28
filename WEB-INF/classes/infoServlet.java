@@ -13,8 +13,8 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 
 public class infoServlet extends HttpServlet {
-    private static final ROOT_PATH = getServletContext().getRealPath("/");
-    private static final CLASSES_PATH = ROOT_PATH + "WEB-INF/classes/";
+    private static final String ROOT_PATH = getServletContext().getRealPath("/");
+    private static final String CLASSES_PATH = ROOT_PATH + "WEB-INF/classes/";
 
     protected void doPost(HttpServletRequest req, HttpServletResponse res)
             throws ServletException, IOException {
