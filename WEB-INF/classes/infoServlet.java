@@ -14,14 +14,15 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 public class infoServlet extends HttpServlet {
 
-    private final String ROOT_PATH = getServletContext().getRealPath("/");
-    private final String CLASSES_PATH = ROOT_PATH + "WEB-INF/classes/";
+    public void init() throws ServletException  {
+    }
 
     protected void doPost(HttpServletRequest req, HttpServletResponse res)
             throws ServletException, IOException {
 
         Consumer <String> forwardTo =(url) ->ForwardTo(url,req,res);
-
+        private final String ROOT_PATH = getServletContext().getRealPath("/");
+        private final String CLASSES_PATH = ROOT_PATH + "WEB-INF/classes/";
 
         if (req.getParameter("files") != null) {
             if (req.getParameter("files").trim().equals("servlet")) {
