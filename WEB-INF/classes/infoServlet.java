@@ -51,15 +51,14 @@ public class infoServlet extends HttpServlet {
         {
             ch = (char) k;
 
-            if(k == 13) 		 // 13 is ASCII value of new line character
+            if(k == 13 || k == 10) 		 // 13 is ASCII value of new line character
                 pw.print("<BR>");
             else if(ch == '<')
                 pw.print("&lt;");
             else if(ch == '>')
                 pw.print("&gt;");
-            else if(ch == ' '){
+            else if(ch == ' ')
                 pw.print("&nbsp");
-            }
             else
                 pw.print(ch);
         }
