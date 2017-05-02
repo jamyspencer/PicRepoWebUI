@@ -142,6 +142,11 @@
                     <input type="submit" class="btn pull-right" value="Search">
                     <div style="clear:both;"></div>
                 </form>
+                This project is a searchable database of pics.<br>
+                You can login in to add pics using admin for a user name and admin for the password.<br>
+                The backend is an sql database that maps the file-name of a pic stored in a sub-directory to a tag.<br>
+                I created a bean (PicList) to interface with the sql database, though I ended up just using it as a pojo, mainly to increase thread security.<br>
+                Currently the tags that will return results are starwars, memes and cartoons.<br>
             </div>
         </div>
         <div id="pic_container" class="col-xs-12 col-sm-12 col-md-9 col-lg-10">
